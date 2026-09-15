@@ -1,0 +1,16 @@
+{
+  "MSRA_train_root": "./data/MSRA/train_5k.txt",
+  "MSRA_dev_root": "./data/MSRA/dev_1k.txt",
+  "MSRA_test_root": "./data/MSRA/test_1k.txt",
+  "weibo_train_root": "./data/weibo/train.txt",
+  "weibo_dev_root": "./data/weibo/dev.txt",
+  "weibo_test_root": "./data/weibo/test.txt",
+  "max_length" : 512,
+  "dropout": 0.1,
+  "batch_size": 12,
+  "learning_rate": 1e-5,
+  "epoch": 12,
+  "patience": 3,
+  "bert_base_path": "./pretrain/bert-base-chinese",
+  "bert_wwm_path": "./pretrain/chinese-bert-wwm"
+}

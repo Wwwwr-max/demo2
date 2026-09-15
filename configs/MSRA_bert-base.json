@@ -1,0 +1,10 @@
+{
+  "experiment_name": "MSRA_bert-base",
+  "train_root": "./data/MSRA/train_5k.txt",
+  "test_root": "./data/MSRA/test_1k.txt",
+  "train_model_root": "./saved_models/MSRA_bert-base_best.pt",
+  "batch_size": 12,
+  "max_length": 512,
+  "dropout": 0.1,
+  "model": "./pretrain/bert-base-chinese"
+}

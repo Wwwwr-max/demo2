@@ -1,0 +1,10 @@
+{
+  "experiment_name": "weibo_bert-wwm",
+  "train_root": "./data/weibo/train.txt",
+  "test_root": "./data/weibo/test.txt",
+  "train_model_root": "./saved_models/weibo_bert-wwm_best.pt",
+  "batch_size": 12,
+  "max_length": 512,
+  "dropout": 0.1,
+  "model": "./pretrain/chinese-bert-wwm"
+}

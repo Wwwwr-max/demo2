@@ -1,0 +1,4 @@
+# 当前 pytorch conda 环境中的直接依赖版本
+torch==2.12.1+cu126
+transformers==5.16.1
+tensorboard==2.21.0
