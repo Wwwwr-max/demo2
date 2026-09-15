@@ -6,8 +6,7 @@
 
 ```text
 demo2
-├── demo2_config.json       # 参数配置
-├── config.py               # 读取 demo2_config.json
+├── config.py               # 读取 config.json
 ├── dataset.py              # 数据读取、Dataset、标签处理和 tokenizer
 ├── model_m.py              # 模型
 ├── train.py                # 训练入口
