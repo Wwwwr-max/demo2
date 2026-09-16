@@ -32,6 +32,37 @@ class Mydata(Dataset):
                     label_list = []
                     continue
         return items, label_num
+    @staticmethod
+    def make_collate_fn(tokenizer, max_length):
+        def collate_fn(items):
+            texts = [x['text'] for x in items]
+            labels = [x['labels'] for x in items]
+            out = tokenizer(
+                texts,
+                is_split_into_words=True,
+                truncation=True,
+                padding=True,
+                max_length=max_length,
+                return_tensors='pt'
+            )
+            process = []
+            for batch_index, label_ids in enumerate(labels):
+                word_ids = out.word_ids(batch_index=batch_index)
+                pre_word_ids = None
+                ids = []
+                for word_id in word_ids:
+                    if word_id is None:
+                        ids.append(-100)
+                    elif word_id != pre_word_ids:
+                        ids.append(label_ids[word_id])
+                    else:
+                        ids.append(-100)
+                    pre_word_ids = word_id
+                process.append(ids)
+            out["labels"] = torch.tensor(process, dtype=torch.long)
+            return out
+
+        return collate_fn
 
     def __len__(self):
         return len(self.items)
@@ -43,33 +74,5 @@ class Mydata(Dataset):
         tag_id = [self.label2id[s] for s in str_labels]
         return {'text':text,'labels':tag_id}
 
-def make_collate_fn(tokenizer,max_length):
-    def collate_fn(items):
-        texts = [x['text'] for x in items]
-        labels = [x['labels'] for x in items]
-        out = tokenizer(
-            texts,
-            is_split_into_words = True,
-            truncation=True,
-            padding = True,
-            max_length =max_length,
-            return_tensors = 'pt'
-        )
-        process = []
-        for batch_index,label_ids in enumerate(labels):
-            word_ids = out.word_ids(batch_index = batch_index)
-            pre_word_ids = None
-            ids = []
-            for word_id in word_ids:
-                if word_id is None:
-                    ids.append(-100)
-                elif word_id != pre_word_ids:
-                    ids.append(label_ids[word_id])
-                else:
-                    ids.append(-100)
-                pre_word_ids = word_id
-            process.append(ids)
-        out["labels"] = torch.tensor(process, dtype=torch.long)
-        return out
-    return collate_fn
+
 
